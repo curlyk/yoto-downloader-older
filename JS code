@@ -20,7 +20,9 @@ function formatBytes(bytes, decimals = 2) {
 
 // Check if the element exists
 if (scriptElement) {
-    // Parse the JSON content of the script element
+    const undef = 'undefined'; // to use when a field is not present
+	
+	// Parse the JSON content of the script element
     const jsonData = JSON.parse(scriptElement.textContent);
 	
 	// Navigate to the specific path where the card metadata is located
@@ -65,21 +67,28 @@ if (scriptElement) {
 	// Get the important details that may not be defined, fallback on an undefined data so it doesn't look blank
 		var category = "tbd"
 		if(card.metadata.category === ""){
-			category = "undefined";
+			category = undef;
 		}else{
 			category = card.metadata.category;
 		}
 		var author = "tbd"
 		if(card.metadata.author === ""){
-			author = "undefined";
+			author = undef;
 		}else{
 			author = card.metadata.author;
 		}
 		var slug = "tbd"
 		if(card.slug === ""){
-			slug = "undefined";
+			slug = undef;
 		}else{
 			slug = card.slug;
+		}
+		
+		var languages = "tbd"
+		try{
+			languages = card.metadata.languages.toString();
+		}catch (e){
+			languages = undef;
 		}
 	
     // Write metadata to a text file, use ":: " as the key::value pair delimiter for safer parsing down the road. We don't want to just drop the entire json blob into the file because it may contain personal data.
@@ -95,7 +104,7 @@ if (scriptElement) {
 		textMeta.innerHTML += `Extended Details\n================\n`;
 		textMeta.innerHTML += `Version:: ${card.content.version}\n`;
 		textMeta.innerHTML += `Category:: ${category}\n`; // only exsists for official cards
-		textMeta.innerHTML += `Languages:: ${card.metadata.languages.toString()}\n`;	//This is an array, so it needs to be forced into a string.
+		textMeta.innerHTML += `Languages:: ${languages}\n`;	//This is an array, so it needs to be forced into a string.
 		textMeta.innerHTML += `PlaybackType:: ${card.content.playbackType}\n`;
 		textMeta.innerHTML += `CardID:: ${card.cardId}\n`;
 		textMeta.innerHTML += `CreatedAt:: ${card.createdAt}\n`;
