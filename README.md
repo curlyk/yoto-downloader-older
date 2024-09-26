@@ -68,6 +68,7 @@ Download the files you'd like using "save as.." or select multiple files for bat
 
 ### Step 6:
 To complete the archvial process, make sure to download the Tracks, Icons, Metadata file and Card Art. Zip the whole bundle up and store it somewhere safe.
+**Note: When using Simple Mass Downloader, the metadata text file is not downloaded automatically. You need to just click that one link to download it.**
 
 ## Cleanup Notes
 To minify and inset into a bookmarkable link
