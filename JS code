@@ -34,7 +34,7 @@ if (scriptElement) {
 
     // Create a title for the container
 		const containerTitleApp = document.createElement('h2');
-		containerTitleApp.innerHTML += '<a href="https://github.com/humor4fun/yoto-downloader-backup">Downloader for Yoto</a>';
+		containerTitleApp.innerHTML += '<a href="https://github.com/humor4fun/yoto-archival-downloader">Archival Downloader for Yoto</a>';
 
     // Create a description container, this is added to the Instructions container
 		const containerDescription = document.createElement('p');
