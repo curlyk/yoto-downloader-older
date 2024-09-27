@@ -23,7 +23,12 @@ I've forked this from the original creator because I wanted to perform a signifi
 - Renamed the files to include the CardTitle and a 3-digit padded track number
 - Added a metadata text field that pulls lots of non-identifying information from the card so it can be stored in a text file.
 
-
+## Future Ideas
+- reformat the links to one track per line with a link to their icon and track file prepared with a better file name for mass downloading
+- delete the banner at the bottom of the page
+- remove the useless download links so they don't get downloaded
+- consider deleting the player widget and stuff
+- figure out how to minimize the code and make the bookmarklet automatically. my code got too long 🤷‍♂️
 
 ## Features
 
