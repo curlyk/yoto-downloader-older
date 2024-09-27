@@ -1,6 +1,7 @@
 // First, find the script element by its ID
 const scriptElement = document.getElementById('__NEXT_DATA__');
 
+// function to convert seconds integer into human readable length
 function convertSeconds(seconds) {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -9,13 +10,29 @@ function convertSeconds(seconds) {
     return `${hours}h ${minutes}m ${remainingSeconds}s`;
 }
 
+// function to convert bytes data into human readable
 function formatBytes(bytes, decimals = 2) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
     const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+}
+
+// Function to delete elements with names matching a regex pattern
+function deleteElementsByRegex(regexPattern) {
+    // Get all elements in the document
+    const allElements = document.querySelectorAll('*');
+    
+    // Loop through all elements
+    allElements.forEach(element => {
+        // Check if the element's name matches the regex pattern
+        if (regexPattern.test(element.name)) {
+            // Remove the element from the DOM
+            element.remove();
+        }
+    });
 }
 
 // Check if the element exists
@@ -224,7 +241,13 @@ if (scriptElement) {
 	container.appendChild(containerInstructions);
 	
     // Insert the container at the top of the body of the page
-    document.body.insertBefore(container, document.body.firstChild);
+        document.body.insertBefore(container, document.body.firstChild);
+	
+    // Clean up some of the now-useless content from the page
+        document.getElementsByClassName('Footer_appDownloadBar__g7nY9')[0].remove();
+        document.getElementsByClassName('player-controls')[0].remove();
+
+	
 } else {
     console.error('Script element not found');
 }
