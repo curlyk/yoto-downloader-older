@@ -8,6 +8,7 @@ This project provides a simple and efficient tool for downloading audio, icon, c
 ## Fork - September 26, 2024
 
 I've forked this from the original creator because I wanted to perform a significant rework.
+- Deletes the unused file links and banners (footer, player controls) so SMD works better.
 - Fixed an error with MYO cards having undefined language strings throwing an error instead of just showing up blank.
 - standardize the "undefined" string with a const
 - refactored the container layouts
@@ -25,9 +26,9 @@ I've forked this from the original creator because I wanted to perform a signifi
 
 ## Future Ideas
 - reformat the links to one track per line with a link to their icon and track file prepared with a better file name for mass downloading
-- delete the banner at the bottom of the page
-- remove the useless download links so they don't get downloaded
-- consider deleting the player widget and stuff
+- ~delete the banner at the bottom of the page~
+- ~remove the useless download links so they don't get downloaded~
+- ~consider deleting the player widget and stuff~
 - figure out how to minimize the code and make the bookmarklet automatically. my code got too long 🤷‍♂️
 
 ## Features
