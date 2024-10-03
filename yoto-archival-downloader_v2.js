@@ -1,4 +1,3 @@
-
 // function to convert seconds integer into human readable length
 function convertSeconds(seconds) {
     const hours = Math.floor(seconds / 3600);
@@ -23,24 +22,24 @@ const scriptElement = document.getElementById('__NEXT_DATA__');
 
 // Check if the element exists
 if (scriptElement) {
-    const undef = 'undefined'; // to use when a field is not present
+	const undef = 'undefined'; // to use when a field is not present
 	const jsonData = JSON.parse(scriptElement.textContent); // Parse the JSON content of the script element
 	const card = jsonData.props.pageProps.card; // Navigate to the specific path where the card metadata is located
 	const chapters = jsonData.props.pageProps.card.content.chapters; // Navigate to the specific path where trackUrl, title, and icon16x16 are located
 
-    // Create a container for the links
+	// Create a container for the links
 		const container = document.createElement('div');
 		container.style.margin = '20px';
 		container.style.backgroundColor = 'rgba(244, 84, 54, .6)';
 		container.style.padding = '20px';
 		container.style.font = 'normal 10pt Source Sans Pro, Source Sans, Calibri, Arial, Tahoma';
 
-    // Add a title to the container
+	// Add a title to the container
 		const containerTitle = document.createElement('h2');
 		containerTitle.innerHTML += '<a href="https://github.com/humor4fun/yoto-archival-downloader">Archival Downloader for Yoto</a>';
 
 
-    // Add an explanatory paragraph to the container
+	// Add an explanatory paragraph to the container
 		const containerP = document.createElement('p');
 		containerP.innerHTML += 'Need help? Click the title.<br /><br />';
 	
@@ -56,7 +55,7 @@ if (scriptElement) {
 		let slug = (card.slug) ? card.slug : undef;
 		let languages = (card.metadata.languages) ? card.metadata.languages.toString() : undef;		
 	
-    // Write metadata to a text file, use ":: " as the key::value pair delimiter for safer parsing down the road. We don't want to just drop the entire json blob into the file because it may contain personal data.
+	// Write metadata to a text file, use ":: " as the key::value pair delimiter for safer parsing down the road. We don't want to just drop the entire json blob into the file because it may contain personal data.
 		const textMeta = document.createElement('textarea');    
 		textMeta.setAttribute("rows", "5");
 		textMeta.setAttribute("cols", "50");
@@ -82,7 +81,7 @@ if (scriptElement) {
 		textMeta.innerHTML += `ReadableFileSize:: ${formatBytes(card.metadata.media.fileSize)}\n`; // not always available, so let's just calculate it to be easier
 		textMeta.innerHTML += `Note:: ${card.metadata.note}\n`;
 		textMeta.innerHTML += `\n`;
-	    
+		
 	// These fields only exist in MYO cards
 		textMeta.innerHTML += `\n`;
 		textMeta.innerHTML += `Share Statistics\n================\n`;
@@ -103,21 +102,23 @@ if (scriptElement) {
 		var tblHeader = document.createElement('tr');
 		tblHeader.style.color = '#ffffff';
 		tblHeader.style.backgroundColor = '#336699';
-		tblHeader.innerHTML = "<th style='border: 0px;'>&nbsp;</th><th style='border: 0px; text-align: center;'>Track #</th><th style='border: 0px; text-align: left;'>Track Title</th><th style='border: 0px;'>Track Link</th><th style='border: 0px;'>Icon Link</th>";
+		tblHeader.innerHTML = "<th style='border: 0px; text-align: center;'>#</th><th style='border: 0px; text-align: center;'>Track</th><th style='border: 0px; text-align: left'>Icon</th>";
 
 		contentTable.appendChild(tblHeader);
 
 		// Initialize track and image numbers
 		let trackNumber = 1;
 
-		// Loop through chapters and tracks to create links
+	// Loop through chapters and tracks to create links
 		chapters.forEach(chapter => {
-			chapter.tracks.forEach(track => {
-				let trackPath = (track.trackUrl) ? track.trackUrl : "";
-				let imagePath = (chapter.display && chapter.display.icon16x16) ? chapter.display.icon16x16 : "";
-				const trackPad = trackNumber.toString().padStart(3, '0');
-				
-					// Add the track info into the metadata file
+		chapter.tracks.forEach(track => {
+			let trackPath = (track.trackUrl) ? track.trackUrl : "";
+			let imagePath = (chapter.display && chapter.display.icon16x16) ? chapter.display.icon16x16 : "";
+			const trackPad = trackNumber.toString().padStart(3, '0');
+			const filenamebase = `${card.title}  - ${trackPad} - ${track.title}`; 
+			console.log(card.title);
+			
+			// Add the track info into the metadata file
 				textMeta.innerHTML += `TrackNumber:: ${trackPad}\n`;
 				textMeta.innerHTML += `Title:: ${track.title}\n`;
 				textMeta.innerHTML += `Format:: ${track.format}\n`;
@@ -129,24 +130,23 @@ if (scriptElement) {
 				textMeta.innerHTML += `Channels:: ${track.channels}\n`;
 				textMeta.innerHTML += `\n`;
 
-				let tblCells = "";
-				tblCells += "<td style='border: 1px solid white; text-align: center'>" + ((imagePath != "") ? "<img src='" + imagePath + "' style='border: 0px;' />" : "") + "</td>";
-				tblCells += "<td style='border: 1px solid white; text-align: center'>" + trackNumber.toString().padStart(3,'0') + "</td><td style='border: 1px solid white; width: 400px;'>" + track.title + "</td>";
-				tblCells += "<td style='border: 1px solid white; text-align: center'>" + ((trackPath != "") ? "[<a href='" + trackPath + "' title='" + card.title + " = " + trackPad + " - " + track.title + "' target='_blank'>Get</a>]" : "") + "</td>";
-				tblCells += "<td style='border: 1px solid white; text-align: center'>" + ((imagePath != "") ? "[<a href='" + imagePath + "' title='" + card.title + " = " + trackPad + " - " + track.title + "' target='_blank'>Get</a>]" : "") + "</td>";
+			let tblCells = "";
+			tblCells += "<td style='border: 1px solid white; width: 35px;'>" + trackNumber + "</td>";
+			tblCells += "<td style='border: 1px solid white; text-align: left; width: 100px;'>" + ((trackPath != "") ? "<a href='" + trackPath + "' title='" + filenamebase + "' target='_blank'>" + track.title + "</a>" : "") + "</td>";
+			tblCells += "<td style='border: 1px solid white; text-align: center; width: 45px;'>" + ((imagePath != "") ? "<a href='" + imagePath + "' title='" + filenamebase + " (icon)' target='_blank'>" + ((imagePath != "") ? "<img src='" + imagePath + "' style='border: 0px;' />" : "")+ "</a>" : "") + "</td>";
 
-				var tblRow = document.createElement('tr');
-				tblRow.innerHTML = tblCells;
+			var tblRow = document.createElement('tr');
+			tblRow.innerHTML = tblCells;
 
-				// Append the track line to the container
-				contentTable.appendChild(tblRow);
+			// Append the track line to the container
+			contentTable.appendChild(tblRow);
 
-				// Increment track number
-				trackNumber++;
-			});
+			// Increment track number
+			trackNumber++;
+		});
 		});
 
-    //Make the metadata content into a downloadable text file
+	//Make the metadata content into a downloadable text file
 	// TODO: it would be good to put a button next to the textarea that copies the contents to clipboard if we can't set it to be downloadable.
 		const metaRawText = textMeta.value; //get content of the text area
 		const blob = new Blob([metaRawText], {type: 'text/plain'}); //create a blob with the content
@@ -178,16 +178,16 @@ if (scriptElement) {
 	container.appendChild(containerMeta);
 	container.appendChild(contentTable);
 
-    // Let's remove the player controls div to clean up the page and simplify the Mass Downloader process
-    const playerControlsDiv = document.getElementsByClassName("player-controls")[0];
-    if (playerControlsDiv) { playerControlsDiv.innerHTML = "<br /><br />"; }
+	// Let's remove the player controls div to clean up the page and simplify the Mass Downloader process
+	const playerControlsDiv = document.getElementsByClassName("player-controls")[0];
+	if (playerControlsDiv) { playerControlsDiv.innerHTML = "<br /><br />"; }
 
-    // Let's remove the footer div to clean up the page and simplify the Mass Downloader process
-    const footerDiv = document.getElementsByClassName("Footer_appDownloadBar__g7nY9")[0];
-    if (footerDiv) { footerDiv.remove(); }
+	// Let's remove the footer div to clean up the page and simplify the Mass Downloader process
+	const footerDiv = document.getElementsByClassName("Footer_appDownloadBar__g7nY9")[0];
+	if (footerDiv) { footerDiv.remove(); }
 
-    // Insert the container at the top of the body of the page
-    document.body.insertBefore(container, document.body.firstChild);
+	// Insert the container at the top of the body of the page
+	document.body.insertBefore(container, document.body.firstChild);
 } else {
-    console.error('Playlist Data Not Found');
+	console.error('Playlist Data Not Found');
 }
