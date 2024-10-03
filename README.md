@@ -3,11 +3,14 @@ Archival file content downloader for Yoto Player
 
 This project provides a simple and efficient tool for downloading audio, icon, coverart, and metadata files from Yoto cards and MYO playlists. The tool is designed to help users easily backup their purchased content in a future-proof medium.
 
-![image](https://github.com/user-attachments/assets/283670b9-cc17-42eb-a70d-ba10754dc772)
+![image](https://github.com/user-attachments/assets/9baf2b9d-09fb-49a8-b91c-d2cf1fc92b1e)
 
 ## Fork - September 26, 2024
 
 I've forked this from the original creator because I wanted to perform a significant rework.
+- reformated the links to one track per line with a link to their icon and track file prepared with a better file name for mass downloading
+- Removed all the instructions and simplified the preamble. Presumably, if you ar eusing this you know what it does and how to use it.
+- refactored the proposed table to minimize real estate. It's not the prettiest but it it will work :)
 - Deletes the unused file links and banners (footer, player controls) so SMD works better.
 - Fixed an error with MYO cards having undefined language strings throwing an error instead of just showing up blank.
 - standardize the "undefined" string with a const
@@ -25,7 +28,7 @@ I've forked this from the original creator because I wanted to perform a signifi
 - Added a metadata text field that pulls lots of non-identifying information from the card so it can be stored in a text file.
 
 ## Future Ideas
-- reformat the links to one track per line with a link to their icon and track file prepared with a better file name for mass downloading
+- ~reformat the links to one track per line with a link to their icon and track file prepared with a better file name for mass downloading~
 - ~delete the banner at the bottom of the page~
 - ~remove the useless download links so they don't get downloaded~
 - ~consider deleting the player widget and stuff~
@@ -47,6 +50,12 @@ I've forked this from the original creator because I wanted to perform a signifi
 - The Code from  `JS code`
 - [Simple Mass Downloader](https://chromewebstore.google.com/detail/simple-mass-downloader/abdkkegmcbiomijcbdaodaflgehfffed) (optional but very much recommended)
 - NFC Tools app ([Andriod](https://play.google.com/store/apps/details?id=com.wakdev.wdnfc&hl=en_US&gl=US) | [iOS](https://apps.apple.com/us/app/nfc-tools/id1252962749))
+
+## Bookmarklet
+Create a bookmark in your browser and paste this into the link location. This will let you simply click the bookmark link when you are on a yoto.io page to activate the code.
+```
+coming soon
+```
 
 ## Usage
 
