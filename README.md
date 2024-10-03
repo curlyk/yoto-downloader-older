@@ -5,6 +5,9 @@ This project provides a simple and efficient tool for downloading audio, icon, c
 
 ![image](https://github.com/user-attachments/assets/9baf2b9d-09fb-49a8-b91c-d2cf1fc92b1e)
 
+## Known Issues
+1. Card Titles that have `'` or other special characters are likely to cause the filenames to be completely broken.
+
 ## Fork - September 26, 2024
 
 I've forked this from the original creator because I wanted to perform a significant rework.
